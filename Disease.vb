@@ -1,12 +1,13 @@
-﻿' Surname , Initials : Hlebela ,JM
+﻿'***********************************
 'Practical :08
 'Student Id : 221026973
 'Class Name: Disease
-
+'***********************************
 
 Option strict On
-Option infer off
-Option Explicit on
+Option infer Off
+Option Explicit On
+
 <Serializable()> Public mustInherit class Disease
 
 	Private _Name As String
