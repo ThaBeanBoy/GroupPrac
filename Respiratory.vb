@@ -44,6 +44,10 @@ Public Class Respiratory
     End Property
 
     '<<Methods>>
+    'Public Overrides Function Improving() As String
+    '   Throw New NotImplementedException()
+    'End Function
+
     Public Overrides Function display(TotalPopulationOfCountry As Integer) As String
         Dim OgInfo As String = MyBase.display(TotalPopulationOfCountry)
         Dim PA As String = "Part Affected: " & _PartAffected & Environment.NewLine

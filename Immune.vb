@@ -24,6 +24,25 @@ Public Class Immune
         _Cause = Cause
     End Sub
 
+    '<<Property Methods>>
+    Public Property NameOfCells As String
+        Get
+            Return _NameOfCells
+        End Get
+        Set(value As String)
+            _NameOfCells = value
+        End Set
+    End Property
+
+    Public Property Cause As String
+        Get
+            Return _Cause
+        End Get
+        Set(value As String)
+            _Cause = value
+        End Set
+    End Property
+
     '<<Methods>>
     'Public Overrides Function Improving() As String
     '   Throw New NotImplementedException()
