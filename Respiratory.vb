@@ -1,9 +1,12 @@
-﻿'***********************************
-'Surname, Initial: Chipoyera TG
-'Practical :08
-'Student Id : 220150124
-'Class Name: Immune
-'***********************************
+﻿' ***************************************************************** 
+' Team Number: 20
+' Team Member 1 Details: Chipoyera, TG (220150124) 
+' Team Member 2 Details: Hlebela, JM (221026973) 
+' Team Member 3 Details: NDHLOVU, AJ(221020749) 
+' Team Member 4 Details: Ntuli, SD (221076674) 
+' Practical: Team Project 
+' Class name: (name of the class) 
+' *****************************************************************
 
 Option Strict On
 Option Explicit On
