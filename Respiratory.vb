@@ -25,7 +25,23 @@ Public Class Respiratory
     End Sub
 
     '<<Property Methods>>
+    Public Property PartAffected() As String
+        Get
+            Return _PartAffected
+        End Get
+        Set(value As String)
+            _PartAffected = value
+        End Set
+    End Property
 
+    Public Property AverageNumberOfCoughs() As Double
+        Get
+            Return _AveNumOfCoughs
+        End Get
+        Set(value As Double)
+            _AveNumOfCoughs = value
+        End Set
+    End Property
 
     '<<Methods>>
     Public Overrides Function display(TotalPopulationOfCountry As Integer) As String

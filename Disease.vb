@@ -40,7 +40,7 @@ Option Explicit On
 		End Set
 	End Property
 
-	Public Property Budget As Double
+	Public Property Budget() As Double
 		Get
 			Return _Budget
 		End Get
@@ -53,7 +53,7 @@ Option Explicit On
 		End Set
 	End Property
 
-	Public Property Treatable As Boolean
+	Public Property Treatable() As Boolean
 		Get
 			Return _Treatable
 		End Get
