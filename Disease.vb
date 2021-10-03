@@ -15,9 +15,10 @@ Option Explicit On
 	Private _Budget As Double
 	Private _Treatable As Boolean
 
-	Public Sub New(Name As String, PopulationSize As Integer)
+	Public Sub New(Name As String, PopulationSize As Integer, Treatable As Boolean)
 		_Name = Name
 		_numPopulation = PopulationSize
+		_Treatable = Treatable
 	End Sub
 
 	Public ReadOnly Property Name() As String
@@ -61,21 +62,32 @@ Option Explicit On
 		End Set
 	End Property
 
-	Public MustOverride Function calcPercPopulation() As Double
+	Public Overridable Function calcPercPopulation(Value As Integer) As Double
+		Return (numPopulation / Value) * 100
+	End Function
 
-	Public MustOverride Function FindCategorylevel() As Integer
+	Public Overridable Function FindCategorylevel(TotalPopulationOfCountry As Integer) As Integer
+		Select Case (calcPercPopulation(TotalPopulationOfCountry))
+			Case 0 To 49
+				Return If(_Treatable, 1, 2)
+			Case 50 To 70
+				Return If(_Treatable, 2, 3)
+			Case Else
+				Return 3
+		End Select
+	End Function
 
-	Public MustOverride Function Improving() As String
+	'Public MustOverride Function Improving() As String
 
-	Public Overridable Function display() As String
+	Public Overridable Function display(TotalPopulationOfCountry As Integer) As String
 		Dim Ans As String
 		Ans = "Name: " & _Name & Environment.NewLine
 		Ans &= "Population Infected: " & CStr(_numPopulation) & Environment.NewLine
 		Ans &= "Budget: " & Format(Budget, "#.##") & Environment.NewLine
 		Ans &= "Treatable: " & CStr(_Treatable) & Environment.NewLine
-		Ans &= "Percentage of Population Infected: " & Format(calcPercPopulation(), "#.##") & Environment.NewLine
-		Ans &= "Category Level: " & CStr(FindCategorylevel()) & Environment.NewLine
-		Ans &= "Condition Improving " & Improving() & Environment.NewLine
+		Ans &= "Percentage of Population Infected: " & Format(calcPercPopulation(TotalPopulationOfCountry), "#.##") & Environment.NewLine
+		Ans &= "Category Level: " & CStr(FindCategorylevel(TotalPopulationOfCountry)) & Environment.NewLine
+		'Ans &= "Condition Improving " & Improving() & Environment.NewLine
 		Return Ans
 	End Function
 
