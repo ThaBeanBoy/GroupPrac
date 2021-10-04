@@ -12,7 +12,7 @@ Option Strict On
 Option Explicit On
 Option Infer On
 
-Public Class Respiratory
+<Serializable> Public Class Respiratory
     'Inheriting from Disease
     Inherits Disease
 
@@ -21,8 +21,8 @@ Public Class Respiratory
     Private _AveNumOfCoughs As Double
 
     '<<Constructor>>
-    Public Sub New(Name As String, PopulationSize As Integer, Treatable As Boolean, PartAffected As String, AveNumOfCoughs As Double)
-        MyBase.New(Name, PopulationSize, Treatable)
+    Public Sub New(Name As String, PopulationSize As Integer, TotalPopulation As Integer, Treatable As Boolean, PartAffected As String, AveNumOfCoughs As Double)
+        MyBase.New(Name, PopulationSize, TotalPopulation, Treatable)
         _PartAffected = PartAffected
         _AveNumOfCoughs = AveNumOfCoughs
     End Sub
@@ -51,8 +51,8 @@ Public Class Respiratory
     '   Throw New NotImplementedException()
     'End Function
 
-    Public Overrides Function display(TotalPopulationOfCountry As Integer) As String
-        Dim OgInfo As String = MyBase.display(TotalPopulationOfCountry)
+    Public Overrides Function display() As String
+        Dim OgInfo As String = MyBase.display()
         Dim PA As String = "Part Affected: " & _PartAffected & Environment.NewLine
         Dim AVNC As String = "Average number of coughs: " & Format(_AveNumOfCoughs, ".##") & Environment.NewLine
 

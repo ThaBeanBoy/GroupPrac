@@ -13,13 +13,15 @@ Option infer Off
 Option Explicit On
 
 <Serializable()> Public mustInherit class Disease
+	Protected Shared _TotalPopulation As Integer
 
 	Private _Name As String
 	Private _numPopulation As Integer
 	Private _Budget As Double
 	Private _Treatable As Boolean
 
-	Public Sub New(Name As String, PopulationSize As Integer, Treatable As Boolean)
+	Public Sub New(Name As String, PopulationSize As Integer, TotalPopulation As Integer, Treatable As Boolean)
+		_TotalPopulation = TotalPopulation
 		_Name = Name
 		_numPopulation = PopulationSize
 		_Treatable = Treatable
@@ -66,12 +68,12 @@ Option Explicit On
 		End Set
 	End Property
 
-	Public Overridable Function calcPercPopulation(Value As Integer) As Double
-		Return (numPopulation / Value) * 100
+	Public Overridable Function calcPercPopulation() As Double
+		Return (numPopulation / _TotalPopulation) * 100
 	End Function
 
-	Public Overridable Function FindCategorylevel(TotalPopulationOfCountry As Integer) As Integer
-		Select Case (calcPercPopulation(TotalPopulationOfCountry))
+	Public Overridable Function FindCategorylevel() As Integer
+		Select Case (calcPercPopulation())
 			Case 0 To 49
 				Return If(_Treatable, 1, 2)
 			Case 50 To 70
@@ -83,14 +85,14 @@ Option Explicit On
 
 	'Public MustOverride Function Improving() As String
 
-	Public Overridable Function display(TotalPopulationOfCountry As Integer) As String
+	Public Overridable Function display() As String
 		Dim Ans As String
 		Ans = "Name: " & _Name & Environment.NewLine
 		Ans &= "Population Infected: " & CStr(_numPopulation) & Environment.NewLine
 		Ans &= "Budget: " & Format(Budget, "#.##") & Environment.NewLine
 		Ans &= "Treatable: " & CStr(_Treatable) & Environment.NewLine
-		Ans &= "Percentage of Population Infected: " & Format(calcPercPopulation(TotalPopulationOfCountry), "#.##") & Environment.NewLine
-		Ans &= "Category Level: " & CStr(FindCategorylevel(TotalPopulationOfCountry)) & Environment.NewLine
+		Ans &= "Percentage of Population Infected: " & Format(calcPercPopulation(), "#.##") & Environment.NewLine
+		Ans &= "Category Level: " & CStr(FindCategorylevel()) & Environment.NewLine
 		'Ans &= "Condition Improving " & Improving() & Environment.NewLine
 		Return Ans
 	End Function
