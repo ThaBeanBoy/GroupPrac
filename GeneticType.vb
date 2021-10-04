@@ -5,14 +5,14 @@
 ' Team Member 3 Details: NDHLOVU, AJ(221020749) 
 ' Team Member 4 Details: Ntuli, SD (221076674) 
 ' Practical: Team Project 
-' Class name: (name of the class) 
+' Class name: GeneticType 
 ' *****************************************************************
 
 Option Strict On
 Option Explicit On
 Option Infer On
 
-Public Class GeneticType
+<Serializable()> Public Class GeneticType
 
     Private _Name As String
     Private _Inherited As Boolean
