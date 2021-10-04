@@ -68,6 +68,32 @@ Option Explicit On
 		End Set
 	End Property
 
+	Public Function Improving() As String
+		'The Hingher the category the more effort and money needed to 
+		'Deal with this disease     
+		Dim improve As String
+
+		While calcPercPopulation() < 50
+
+			If Treatable = True Then
+				improve = "Catergory One(2) Improvement"
+			ElseIf Treatable = False Then
+				improve = "Category Two(2) Improvement"
+			End If
+
+		End While
+
+		While calcPercPopulation() > 50
+
+			If Treatable = True Then
+				improve = "Catergory One(3) Improvement"
+			ElseIf Treatable = False Then
+				improve = "Category Two(4) Improvement"
+			End If
+
+		End While
+	End Function
+
 	Public Overridable Function calcPercPopulation() As Double
 		Return (numPopulation / _TotalPopulation) * 100
 	End Function
