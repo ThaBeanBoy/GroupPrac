@@ -12,7 +12,7 @@ Option Strict On
 Option Explicit On
 Option Infer On
 
-Public Class Genetic
+<Serializable()> Public Class Genetic
     Inherits Disease
 
     Private _AverageAge As Double
@@ -47,24 +47,24 @@ Public Class Genetic
         End Set
     End Property
 
-    'Functions
-    'Public Function solution() As String
-    '    Dim tempsol As String
-    '    While calcPercPopulation() < 50
-    '        If Type.Inherited = True Then
-    '            tempsol = "Gene Therapy"
-    '        ElseIf Type.Inherited = False Then
-    '            tempsol = "Gene Modification"
-    '        End If
-    '    End While
-    '    While calcPercPopulation() >= 50
-    '        If Type.Inherited = True Then
-    '            tempsol = "Intensive Gene Therapy"
-    '        ElseIf Type.Inherited = False Then
-    '            tempsol = "Advanced Gene Modification(Not Available in SA)"
-    '        End If
-    '    End While
-    'End Function
+    Functions
+    Public Function solution() As String
+        Dim tempsol As String
+        While calcPercPopulation() < 50
+            If Type.Inherited = True Then
+               tempsol = "Gene Therapy"
+            ElseIf Type.Inherited = False Then
+                tempsol = "Gene Modification"
+            End If
+        End While
+        While calcPercPopulation() >= 50
+            If Type.Inherited = True Then
+                tempsol = "Intensive Gene Therapy"
+            ElseIf Type.Inherited = False Then
+                tempsol = "Advanced Gene Modification(Not Available in SA)"
+            End If
+        End While
+    End Function
 
 
     Public Overrides Function display(TotalPopulationOfCountry As Integer) As String
