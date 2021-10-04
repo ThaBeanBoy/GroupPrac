@@ -64,6 +64,7 @@ Option Infer On
                 tempsol = "Advanced Gene Modification(Not Available in SA)"
             End If
         End While
+        return tempsol
     End Function
 
 
