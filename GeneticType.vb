@@ -17,11 +17,6 @@ Option Infer On
     Private _Name As String
     Private _Inherited As Boolean
 
-    Private Sub New(Name As String, Inherited As Boolean)
-        _Name = Name
-        _Inherited = Inherited
-    End Sub
-
     Public Property Name() As String
         Get
             Return _Name

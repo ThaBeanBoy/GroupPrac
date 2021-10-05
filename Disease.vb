@@ -66,7 +66,6 @@ Option Explicit On
 			_Treatable = Value
 		End Set
 	End Property
-
 	Public Function Improving() As String
 		'The Hingher the category the more effort and money needed to 
 		'Deal with this disease     
@@ -116,7 +115,7 @@ Option Explicit On
 		Dim Ans As String
 		Ans = "Name: " & _Name & Environment.NewLine
 		Ans &= "Population Infected: " & CStr(_numPopulation) & Environment.NewLine
-		Ans &= "Budget: " & Format(Budget, "#.##") & Environment.NewLine
+		Ans &= "Budget: " & Format(_Budget, "#.##") & Environment.NewLine
 		Ans &= "Treatable: " & CStr(_Treatable) & Environment.NewLine
 		Ans &= "Percentage of Population Infected: " & Format(calcPercPopulation(), "#.##") & Environment.NewLine
 		Ans &= "Category Level: " & CStr(FindCategorylevel()) & Environment.NewLine
