@@ -5,7 +5,7 @@
 ' Team Member 3 Details: NDHLOVU, AJ(221020749) 
 ' Team Member 4 Details: Ntuli, SD (221076674) 
 ' Practical: Team Project 
-' Class name: (name of the class) 
+' Class name: Immune 
 ' *****************************************************************
 
 Option Strict On
@@ -21,8 +21,8 @@ Public Class Immune
     Private _Cause As String
 
     '<<Constructor>>
-    Public Sub New(Name As String, PopulationSize As Integer, Treatable As Boolean, NameOfCells As String, Cause As String)
-        MyBase.New(Name, PopulationSize, Treatable)
+    Public Sub New(Name As String, PopulationSize As Integer, TotalPopulation As Integer, Treatable As Boolean, NameOfCells As String, Cause As String)
+        MyBase.New(Name, PopulationSize, TotalPopulation, Treatable)
         _NameOfCells = NameOfCells
         _Cause = Cause
     End Sub
@@ -51,8 +51,8 @@ Public Class Immune
     '   Throw New NotImplementedException()
     'End Function
 
-    Public Overrides Function display(TotalPopulationOfCountry As Integer) As String
-        Dim OGInfo As String = MyBase.display(TotalPopulationOfCountry)
+    Public Overrides Function display() As String
+        Dim OGInfo As String = MyBase.display()
         Dim NameOfCells As String = "Name of cells: " & _NameOfCells & Environment.NewLine
         Dim Cause As String = "Cause: " & _Cause & Environment.NewLine
 
