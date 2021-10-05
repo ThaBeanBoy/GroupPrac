@@ -92,6 +92,8 @@ Option Explicit On
 			End If
 
 		End While
+
+		Return improve
 	End Function
 
 	Public Overridable Function calcPercPopulation() As Double
