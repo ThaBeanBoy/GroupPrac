@@ -18,8 +18,9 @@ Option Infer On
     Private _AverageAge As Double
     Private _Type As GeneticType
 
-    Public Sub New(Name As String, PopulationSize As Integer, TotalPopulation As Integer, Treatable As Boolean, NameOfCells As String, Cause As String)
+    Public Sub New(Name As String, PopulationSize As Integer, TotalPopulation As Integer, Treatable As Boolean, AverageAge As Double)
         MyBase.New(Name, PopulationSize, TotalPopulation, Treatable)
+        _AverageAge = AverageAge
     End Sub
     'Properties
     Public Property AverageAge As Double
