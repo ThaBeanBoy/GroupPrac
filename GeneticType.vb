@@ -22,10 +22,13 @@ Option Infer On
         _Inherited = Inherited
     End Sub
 
-    Public ReadOnly Property Name As String
+    Public Property Name() As String
         Get
             Return _Name
         End Get
+        Set(value As String)
+            _Name = value
+        End Set
     End Property
 
     Public Property Inherited As Boolean
