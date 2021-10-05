@@ -12,7 +12,7 @@ Option Strict On
 Option Explicit On
 Option Infer On
 
-Public Class Immune
+<Serializable> Public Class Immune
     'Inherting from Disease class
     Inherits Disease
 
