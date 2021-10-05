@@ -82,8 +82,8 @@ Public Class Form1
                 'Genetic 
                 Dim objGenetic As Genetic
                 Dim AverageAge As Double = CDbl(InputBox("Please enter the average age"))
-                objGenetic = New Genetic(Name, nPopulation, TotalPopulation, Treatable, AverageAge) 'Delete code unnecessary code on the constructor 
-                'objGenetic.Type.Name = CStr(InputBox("Please enter the name of the genetic type.")) 'We must uncomment  this code since we going to use property method
+                objGenetic = New Genetic(Name, nPopulation, TotalPopulation, Treatable, AverageAge)
+                objGenetic.Type.Name = CStr(InputBox("Please enter the name of the genetic type."))
                 objGenetic.Type.Inherited = CBool(InputBox("is the type inherited", "TRUE OR FALSE"))
 
                 'Upcasting 
