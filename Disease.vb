@@ -14,7 +14,6 @@ Option Explicit On
 
 <Serializable()> Public mustInherit class Disease
 	Protected Shared _TotalPopulation As Integer
-
 	Private _Name As String
 	Private _numPopulation As Integer
 	Private _Budget As Double
