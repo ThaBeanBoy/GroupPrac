@@ -12,7 +12,7 @@ Option Strict On
 Option Explicit On
 Option Infer On
 
-<Serializable> Public Class Respiratory
+<Serializable()> Public Class Respiratory
     'Inheriting from Disease
     Inherits Disease
 
