@@ -22,7 +22,7 @@ Option Explicit On
 	Public Sub New(Name As String, PopulationInfected As Integer, TotalPopulation As Integer, Treatable As Boolean)
 		_TotalPopulation = TotalPopulation
 		_Name = Name
-		_PopulationInfected  = PopulationSize
+		_PopulationInfected = PopulationInfected
 		_Treatable = Treatable
 	End Sub
 
@@ -32,15 +32,15 @@ Option Explicit On
 		End Get
 	End Property
 
-	Public Property PopulationInfected () As Integer
+	Public Property PopulationInfected() As Integer
 		Get
-			Return _PopulationInfected 
+			Return _PopulationInfected
 		End Get
 		Set(value As Integer)
 			If value < 0 Then
-				_PopulationInfected  = 0
+				_PopulationInfected = 0
 			Else
-				_PopulationInfected  = value
+				_PopulationInfected = value
 			End If
 		End Set
 	End Property
@@ -66,12 +66,12 @@ Option Explicit On
 			_Treatable = Value
 		End Set
 	End Property
-	
+
 	Public Function Improving() As String
 		'The Hingher the category the more effort and money needed to 
 		'Deal with this disease     
 		Dim improve As String
-		
+
 		While calcPercPopulation() < 50
 
 			If Treatable = True Then
@@ -96,7 +96,7 @@ Option Explicit On
 	End Function
 
 	Public Overridable Function calcPercPopulation() As Double
-		Return (numPopulation / _TotalPopulation) * 100
+		Return (_PopulationInfected / _TotalPopulation) * 100
 	End Function
 
 	Public Overridable Function FindCategorylevel() As Integer
@@ -115,7 +115,7 @@ Option Explicit On
 	Public Overridable Function display() As String
 		Dim Ans As String
 		Ans = "Name: " & _Name & Environment.NewLine
-		Ans &= "Population Infected: " & CStr(_PopulationInfected ) & Environment.NewLine
+		Ans &= "Population Infected: " & CStr(_PopulationInfected) & Environment.NewLine
 		Ans &= "Budget: " & Format(_Budget, "#.##") & Environment.NewLine
 		Ans &= "Treatable: " & CStr(_Treatable) & Environment.NewLine
 		Ans &= "Percentage of Population Infected: " & Format(calcPercPopulation(), "#.##") & Environment.NewLine
