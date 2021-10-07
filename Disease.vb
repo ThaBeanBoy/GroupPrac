@@ -15,14 +15,14 @@ Option Explicit On
 <Serializable()> Public mustInherit class Disease
 	Protected Shared _TotalPopulation As Integer
 	Private _Name As String
-	Private _numPopulation As Integer
+	Private _PopulationInfected As Integer
 	Private _Budget As Double
 	Private _Treatable As Boolean
 
-	Public Sub New(Name As String, PopulationSize As Integer, TotalPopulation As Integer, Treatable As Boolean)
+	Public Sub New(Name As String, PopulationInfected As Integer, TotalPopulation As Integer, Treatable As Boolean)
 		_TotalPopulation = TotalPopulation
 		_Name = Name
-		_numPopulation = PopulationSize
+		_PopulationInfected  = PopulationSize
 		_Treatable = Treatable
 	End Sub
 
@@ -32,15 +32,15 @@ Option Explicit On
 		End Get
 	End Property
 
-	Public Property numPopulation() As Integer
+	Public Property PopulationInfected () As Integer
 		Get
-			Return _numPopulation
+			Return _PopulationInfected 
 		End Get
 		Set(value As Integer)
 			If value < 0 Then
-				_numPopulation = 0
+				_PopulationInfected  = 0
 			Else
-				_numPopulation = value
+				_PopulationInfected  = value
 			End If
 		End Set
 	End Property
@@ -66,11 +66,12 @@ Option Explicit On
 			_Treatable = Value
 		End Set
 	End Property
+	
 	Public Function Improving() As String
 		'The Hingher the category the more effort and money needed to 
 		'Deal with this disease     
 		Dim improve As String
-
+		
 		While calcPercPopulation() < 50
 
 			If Treatable = True Then
@@ -114,7 +115,7 @@ Option Explicit On
 	Public Overridable Function display() As String
 		Dim Ans As String
 		Ans = "Name: " & _Name & Environment.NewLine
-		Ans &= "Population Infected: " & CStr(_numPopulation) & Environment.NewLine
+		Ans &= "Population Infected: " & CStr(_PopulationInfected ) & Environment.NewLine
 		Ans &= "Budget: " & Format(_Budget, "#.##") & Environment.NewLine
 		Ans &= "Treatable: " & CStr(_Treatable) & Environment.NewLine
 		Ans &= "Percentage of Population Infected: " & Format(calcPercPopulation(), "#.##") & Environment.NewLine
