@@ -17,6 +17,7 @@ Public Class Form1
     Private nD As Integer = 0
     Private Diseases(nD) As Disease
 
+
     'Variables for file tings
     Private FS As FileStream
     Private BF As BinaryFormatter
@@ -50,35 +51,39 @@ Public Class Form1
     End Sub
 
     Private Sub btnSetUpTheApplication_Click(sender As Object, e As EventArgs) Handles btnSetUpTheApplication.Click
-        'Clearing the display screen
-        txtDisplay.Text = ""
+        If Not (nD = 0) Then
+            'Clearing the display screen
+            txtDisplay.Text = ""
 
-        'Downcasting the diseases
-        Dim AllDiseaseInfo As String = ""
-        For DiseaseIndx As Integer = 1 To nD
-            If Not (TryCast(Diseases(DiseaseIndx), Genetic) Is Nothing) Then
-                'Is a genetic disease
-                Dim Genetic As Genetic = DirectCast(Diseases(DiseaseIndx), Genetic)
-                AllDiseaseInfo += Genetic.display()
+            'Downcasting the diseases
+            Dim AllDiseaseInfo As String = ""
+            For DiseaseIndx As Integer = 1 To nD
+                If Not (TryCast(Diseases(DiseaseIndx), Genetic) Is Nothing) Then
+                    'Is a genetic disease
+                    Dim Genetic As Genetic = DirectCast(Diseases(DiseaseIndx), Genetic)
+                    AllDiseaseInfo += Genetic.display()
 
-            ElseIf Not (TryCast(Diseases(DiseaseIndx), Respiratory) Is Nothing) Then
-                'Is a resparitory disease
-                Dim Respiratory As Respiratory = DirectCast(Diseases(DiseaseIndx), Respiratory)
-                AllDiseaseInfo += Respiratory.display()
+                ElseIf Not (TryCast(Diseases(DiseaseIndx), Respiratory) Is Nothing) Then
+                    'Is a resparitory disease
+                    Dim Respiratory As Respiratory = DirectCast(Diseases(DiseaseIndx), Respiratory)
+                    AllDiseaseInfo += Respiratory.display()
 
-            Else
-                'Is a Immune disease
-                Dim Immune As Immune = DirectCast(Diseases(DiseaseIndx), Immune)
-                AllDiseaseInfo += Immune.display()
-            End If
-        Next
+                Else
+                    'Is a Immune disease
+                    Dim Immune As Immune = DirectCast(Diseases(DiseaseIndx), Immune)
+                    AllDiseaseInfo += Immune.display()
+                End If
+            Next
 
-        'Displaying the diseases
-        txtDisplay.Text = AllDiseaseInfo
+            'Displaying the diseases
+            txtDisplay.Text = AllDiseaseInfo
+
+        Else
+            MsgBox("No disease were made")
+        End If
     End Sub
 
     Private Sub btnCaptureTheData_Click(sender As Object, e As EventArgs) Handles btnCaptureTheData.Click
-        nD += 1
         ReDim Preserve Diseases(nD)
         'ReDim Preserve NPopulation(nD)
 
@@ -115,6 +120,8 @@ Public Class Form1
                 Dim objRespiratory As Respiratory
                 objRespiratory = New Respiratory(Name, nPopulation, TotalPopulation, Treatable, PartAffected, AveCoughes)
                 'Upcasting 
+                txtDisplay.Text = objRespiratory.display()
+                nD += 1
                 Diseases(nD) = objRespiratory
             Case 2
                 'Immune 
@@ -123,18 +130,25 @@ Public Class Form1
                 Dim objImmune As Immune
                 objImmune = New Immune(Name, nPopulation, TotalPopulation, Treatable, NameOfCells, Cause)
                 'Upcasting 
+                txtDisplay.Text = objImmune.display()
+                nD += 1
                 Diseases(nD) = objImmune
             Case 3
                 'Genetic 
                 Dim objGenetic As Genetic
                 Dim AverageAge As Double = CDbl(InputBox("Please enter the average age"))
                 objGenetic = New Genetic(Name, nPopulation, TotalPopulation, Treatable, AverageAge)
-                objGenetic.Type.Name = CStr(InputBox("Please enter the name of the genetic type."))
-                objGenetic.Type.Inherited = CBool(InputBox("is the type inherited", "TRUE OR FALSE"))
+
+                Dim GeneticTypeName As String = CStr(InputBox("Please enter the name of the genetic type."))
+                Dim GeneticTypeInherited As Boolean = CBool(InputBox("is the type inherited", "TRUE OR FALSE"))
+                'objGenetic.Type.Name = CStr(InputBox("Please enter the name of the genetic type."))
+                'objGenetic.Type.Inherited = CBool(InputBox("is the type inherited", "TRUE OR FALSE"))
+                objGenetic.Type = New GeneticType(GeneticTypeName, GeneticTypeInherited)
 
                 'Upcasting 
+                txtDisplay.Text = objGenetic.display()
+                nD += 1
                 Diseases(nD) = objGenetic
-
         End Select
 
         'Polymorphism 

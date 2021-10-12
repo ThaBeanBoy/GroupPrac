@@ -52,10 +52,11 @@ Option Infer On
     'End Function
 
     Public Overrides Function display() As String
+        Dim DType As String = "Immune Disease" & Environment.NewLine
         Dim OGInfo As String = MyBase.display()
         Dim NameOfCells As String = "Name of cells: " & _NameOfCells & Environment.NewLine
         Dim Cause As String = "Cause: " & _Cause & Environment.NewLine
 
-        Return OGInfo + NameOfCells + Cause
+        Return DType + OGInfo + NameOfCells + Cause
     End Function
 End Class

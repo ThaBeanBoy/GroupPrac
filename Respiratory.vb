@@ -52,10 +52,11 @@ Option Infer On
     'End Function
 
     Public Overrides Function display() As String
+        Dim DType As String = "Respiratory Disease" & Environment.NewLine
         Dim OgInfo As String = MyBase.display()
         Dim PA As String = "Part Affected: " & _PartAffected & Environment.NewLine
         Dim AVNC As String = "Average number of coughs: " & Format(_AveNumOfCoughs, ".##") & Environment.NewLine
 
-        Return OgInfo + PA + AVNC
+        Return DType + OgInfo + PA + AVNC
     End Function
 End Class
