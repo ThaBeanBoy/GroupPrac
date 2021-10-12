@@ -42,7 +42,7 @@ Partial Class Form1
         'btnSetUpTheApplication
         '
         Me.btnSetUpTheApplication.Location = New System.Drawing.Point(16, 44)
-        Me.btnSetUpTheApplication.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSetUpTheApplication.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSetUpTheApplication.Name = "btnSetUpTheApplication"
         Me.btnSetUpTheApplication.Size = New System.Drawing.Size(128, 38)
         Me.btnSetUpTheApplication.TabIndex = 1
@@ -52,7 +52,7 @@ Partial Class Form1
         'btnCaptureTheData
         '
         Me.btnCaptureTheData.Location = New System.Drawing.Point(16, 101)
-        Me.btnCaptureTheData.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnCaptureTheData.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCaptureTheData.Name = "btnCaptureTheData"
         Me.btnCaptureTheData.Size = New System.Drawing.Size(128, 38)
         Me.btnCaptureTheData.TabIndex = 2
@@ -62,7 +62,7 @@ Partial Class Form1
         'btnFindASolution
         '
         Me.btnFindASolution.Location = New System.Drawing.Point(16, 164)
-        Me.btnFindASolution.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnFindASolution.Margin = New System.Windows.Forms.Padding(4)
         Me.btnFindASolution.Name = "btnFindASolution"
         Me.btnFindASolution.Size = New System.Drawing.Size(128, 38)
         Me.btnFindASolution.TabIndex = 3
@@ -72,9 +72,10 @@ Partial Class Form1
         'txtDisplay
         '
         Me.txtDisplay.Location = New System.Drawing.Point(152, 44)
-        Me.txtDisplay.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtDisplay.Margin = New System.Windows.Forms.Padding(4)
         Me.txtDisplay.Multiline = True
         Me.txtDisplay.Name = "txtDisplay"
+        Me.txtDisplay.ReadOnly = True
         Me.txtDisplay.Size = New System.Drawing.Size(631, 328)
         Me.txtDisplay.TabIndex = 4
         '
