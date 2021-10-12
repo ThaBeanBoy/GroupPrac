@@ -114,6 +114,11 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim Home As String = "Home:" & Environment.NewLine
+        Home += "-------------------" & Environment.NewLine & Environment.NewLine
+        Home += "1. Press the 'Set Up' button to retrive saved data" & Environment.NewLine & Environment.NewLine
+        Home += "2. Press the 'Capture Data' button to save new disease" & Environment.NewLine & Environment.NewLine
 
+        txtDisplay.Text = Home
     End Sub
 End Class

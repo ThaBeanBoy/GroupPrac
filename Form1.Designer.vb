@@ -33,25 +33,25 @@ Partial Class Form1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(29, 9)
+        Me.Label1.Location = New System.Drawing.Point(2, 9)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(737, 32)
+        Me.Label1.Size = New System.Drawing.Size(331, 32)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Welcome Supa Nova Cool Kidz  Coding Club Member"
+        Me.Label1.Text = "Disease Control Center"
         '
         'btnSetUpTheApplication
         '
-        Me.btnSetUpTheApplication.Location = New System.Drawing.Point(16, 44)
+        Me.btnSetUpTheApplication.Location = New System.Drawing.Point(8, 45)
         Me.btnSetUpTheApplication.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSetUpTheApplication.Name = "btnSetUpTheApplication"
         Me.btnSetUpTheApplication.Size = New System.Drawing.Size(128, 38)
         Me.btnSetUpTheApplication.TabIndex = 1
-        Me.btnSetUpTheApplication.Text = "SetUp"
+        Me.btnSetUpTheApplication.Text = "Set Up"
         Me.btnSetUpTheApplication.UseVisualStyleBackColor = True
         '
         'btnCaptureTheData
         '
-        Me.btnCaptureTheData.Location = New System.Drawing.Point(16, 101)
+        Me.btnCaptureTheData.Location = New System.Drawing.Point(8, 91)
         Me.btnCaptureTheData.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCaptureTheData.Name = "btnCaptureTheData"
         Me.btnCaptureTheData.Size = New System.Drawing.Size(128, 38)
@@ -61,7 +61,7 @@ Partial Class Form1
         '
         'btnFindASolution
         '
-        Me.btnFindASolution.Location = New System.Drawing.Point(16, 164)
+        Me.btnFindASolution.Location = New System.Drawing.Point(8, 137)
         Me.btnFindASolution.Margin = New System.Windows.Forms.Padding(4)
         Me.btnFindASolution.Name = "btnFindASolution"
         Me.btnFindASolution.Size = New System.Drawing.Size(128, 38)
@@ -71,7 +71,7 @@ Partial Class Form1
         '
         'txtDisplay
         '
-        Me.txtDisplay.Location = New System.Drawing.Point(152, 44)
+        Me.txtDisplay.Location = New System.Drawing.Point(144, 45)
         Me.txtDisplay.Margin = New System.Windows.Forms.Padding(4)
         Me.txtDisplay.Multiline = True
         Me.txtDisplay.Name = "txtDisplay"
