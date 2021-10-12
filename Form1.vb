@@ -13,22 +13,68 @@ Option Infer Off
 Imports System.IO
 Imports System.Runtime.Serialization.Formatters.Binary
 Public Class Form1
-    Private Diseases() As Disease
-    Private nD As Integer
+    'Variables for form
+    Private nD As Integer = 0
+    Private Diseases(nD) As Disease
+
+    'Variables for file tings
     Private FS As FileStream
     Private BF As BinaryFormatter
+    Private Const FileName As String = "Diseasefile.txt"
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Home screen for da app
+        Dim Home As String = "Home:" & Environment.NewLine
+        Home += "-------------------" & Environment.NewLine & Environment.NewLine
+        Home += "1. Press the 'Set Up' button to retrive saved data" & Environment.NewLine & Environment.NewLine
+        Home += "2. Press the 'Capture Data' button to save new disease" & Environment.NewLine & Environment.NewLine
+
+        txtDisplay.Text = Home
+
+        'Baking the file variable
+        FS = New FileStream(FileName, FileMode.OpenOrCreate, FileAccess.Read)
+        BF = New BinaryFormatter()
+
+        While FS.Position < FS.Length
+            'Translating from the trecherous 'BITS' to useable ting
+            nD += 1
+            Dim TempDisease As Disease
+            TempDisease = DirectCast(BF.Deserialize(FS), Disease)
+
+            'Adding the understandable tings to the disease array
+            ReDim Preserve Diseases(nD)
+            Diseases(nD) = TempDisease
+        End While
+
+        FS.Close()
+    End Sub
 
     Private Sub btnSetUpTheApplication_Click(sender As Object, e As EventArgs) Handles btnSetUpTheApplication.Click
-        'nD += 1
-        'ReDim Preserve Diseases(nD)
-        'ReDim Preserve NPopulation(nD)
+        'Clearing the display screen
+        txtDisplay.Text = ""
 
-        'For c As Integer = 1 To nD
-        '    Diseases(nD) = New Disease()
-        '    Diseases(nD).numPopulation = CInt(InputBox("Please enter the population size in the Area?"))
+        'Downcasting the diseases
+        Dim AllDiseaseInfo As String = ""
+        For DiseaseIndx As Integer = 1 To nD
+            If Not (TryCast(Diseases(DiseaseIndx), Genetic) Is Nothing) Then
+                'Is a genetic disease
+                Dim Genetic As Genetic = DirectCast(Diseases(DiseaseIndx), Genetic)
+                AllDiseaseInfo += Genetic.display()
 
-        'Next c
+            ElseIf Not (TryCast(Diseases(DiseaseIndx), Respiratory) Is Nothing) Then
+                'Is a resparitory disease
+                Dim Respiratory As Respiratory = DirectCast(Diseases(DiseaseIndx), Respiratory)
+                AllDiseaseInfo += Respiratory.display()
 
+            Else
+                'Is a Immune disease
+                Dim Immune As Immune = DirectCast(Diseases(DiseaseIndx), Immune)
+                AllDiseaseInfo += Immune.display()
+            End If
+        Next
+
+        'Displaying the diseases
+        txtDisplay.Text = AllDiseaseInfo
     End Sub
 
     Private Sub btnCaptureTheData_Click(sender As Object, e As EventArgs) Handles btnCaptureTheData.Click
@@ -98,7 +144,7 @@ Public Class Form1
 
 
 
-        FS = New FileStream("Diseasefile.txt", FileMode.Create, FileAccess.Write)
+        FS = New FileStream(FileName, FileMode.Create, FileAccess.Write)
         BF = New BinaryFormatter
 
         For i As Integer = 1 To nD
@@ -113,12 +159,4 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim Home As String = "Home:" & Environment.NewLine
-        Home += "-------------------" & Environment.NewLine & Environment.NewLine
-        Home += "1. Press the 'Set Up' button to retrive saved data" & Environment.NewLine & Environment.NewLine
-        Home += "2. Press the 'Capture Data' button to save new disease" & Environment.NewLine & Environment.NewLine
-
-        txtDisplay.Text = Home
-    End Sub
 End Class

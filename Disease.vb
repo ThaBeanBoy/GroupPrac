@@ -118,7 +118,7 @@ Option Explicit On
 		Ans &= "Population Infected: " & CStr(_PopulationInfected) & Environment.NewLine
 		Ans &= "Budget: " & Format(_Budget, "#.##") & Environment.NewLine
 		Ans &= "Treatable: " & CStr(_Treatable) & Environment.NewLine
-		Ans &= "Percentage of Population Infected: " & Format(calcPercPopulation(), "#.##") & Environment.NewLine
+		Ans &= "Percentage of Population Infected: " & Format(calcPercPopulation(), ".##") & Environment.NewLine
 		Ans &= "Category Level: " & CStr(FindCategorylevel()) & Environment.NewLine
 		'Ans &= "Condition Improving " & Improving() & Environment.NewLine
 		Return Ans
