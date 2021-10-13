@@ -21,8 +21,8 @@ Option Infer On
     Private _Cause As String
 
     '<<Constructor>>
-    Public Sub New(Name As String, PopulationSize As Integer, TotalPopulation As Integer, Treatable As Boolean, NameOfCells As String, Cause As String)
-        MyBase.New(Name, PopulationSize, TotalPopulation, Treatable)
+    Public Sub New(Name As String, PopulationInfected As Integer, TotalPopulation As Integer, Treatable As Boolean, Budget As Double, NameOfCells As String, Cause As String)
+        MyBase.New(Name, PopulationInfected, TotalPopulation, Treatable, Budget)
         _NameOfCells = NameOfCells
         _Cause = Cause
     End Sub
@@ -57,6 +57,6 @@ Option Infer On
         Dim NameOfCells As String = "Name of cells: " & _NameOfCells & Environment.NewLine
         Dim Cause As String = "Cause: " & _Cause & Environment.NewLine
 
-        Return DType + OGInfo + NameOfCells + Cause
+        Return DType + OGInfo + NameOfCells + Cause & Environment.NewLine
     End Function
 End Class

@@ -18,8 +18,9 @@ Option Infer On
     Private _AverageAge As Double
     Private _Type As GeneticType
 
-    Public Sub New(Name As String, PopulationSize As Integer, TotalPopulation As Integer, Treatable As Boolean, AverageAge As Double)
-        MyBase.New(Name, PopulationSize, TotalPopulation, Treatable)
+    Public Sub New(Name As String, PopulationInfected As Integer, TotalPopulation As Integer, Treatable As Boolean, Budget As Double, AverageAge As Double, GenType As GeneticType)
+        MyBase.New(Name, PopulationInfected, TotalPopulation, Treatable, Budget)
+        _Type = GenType
         _AverageAge = AverageAge
     End Sub
     'Properties
@@ -50,26 +51,26 @@ Option Infer On
 
     Public Function solution() As String
         Dim tempsol As String
-        While calcPercPopulation() < 50
+        If calcPercPopulation() < 50 Then
             If Type.Inherited = True Then
                 tempsol = "Gene Therapy"
             ElseIf Type.Inherited = False Then
                 tempsol = "Gene Modification"
             End If
-        End While
-        While calcPercPopulation() >= 50
+        Else
             If Type.Inherited = True Then
                 tempsol = "Intensive Gene Therapy"
             ElseIf Type.Inherited = False Then
                 tempsol = "Advanced Gene Modification(Not Available in SA)"
             End If
-        End While
+        End If
+
         Return tempsol
     End Function
 
     Public Overrides Function display() As String
         Dim tempText As String
-        tempText = "Genetic Disease"
+        tempText = "Genetic Disease" & Environment.NewLine
         tempText &= MyBase.display()
         tempText &= "Average Age: " & CStr(AverageAge) & Environment.NewLine
         tempText &= "Type Of gene Mutation: " & Type.Name & Environment.NewLine
@@ -77,7 +78,7 @@ Option Infer On
         tempText &= "Life Span: " & CStr(Type.FindLifeSpan()) & " years" & Environment.NewLine
         tempText &= "Solution : " & CStr(solution()) & Environment.NewLine
 
-        Return tempText
+        Return tempText & Environment.NewLine
     End Function
 
 End Class

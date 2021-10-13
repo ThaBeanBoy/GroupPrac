@@ -26,7 +26,7 @@ Partial Class Form1
         Me.btnSetUpTheApplication = New System.Windows.Forms.Button()
         Me.btnCaptureTheData = New System.Windows.Forms.Button()
         Me.btnFindASolution = New System.Windows.Forms.Button()
-        Me.txtDisplay = New System.Windows.Forms.TextBox()
+        Me.txtDisplay = New System.Windows.Forms.RichTextBox()
         Me.SuspendLayout()
         '
         'Label1
@@ -71,13 +71,13 @@ Partial Class Form1
         '
         'txtDisplay
         '
-        Me.txtDisplay.Location = New System.Drawing.Point(144, 45)
-        Me.txtDisplay.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtDisplay.Multiline = True
+        Me.txtDisplay.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDisplay.Location = New System.Drawing.Point(143, 45)
         Me.txtDisplay.Name = "txtDisplay"
         Me.txtDisplay.ReadOnly = True
-        Me.txtDisplay.Size = New System.Drawing.Size(631, 328)
-        Me.txtDisplay.TabIndex = 4
+        Me.txtDisplay.Size = New System.Drawing.Size(645, 325)
+        Me.txtDisplay.TabIndex = 5
+        Me.txtDisplay.Text = ""
         '
         'Form1
         '
@@ -101,5 +101,5 @@ Partial Class Form1
     Friend WithEvents btnSetUpTheApplication As Button
     Friend WithEvents btnCaptureTheData As Button
     Friend WithEvents btnFindASolution As Button
-    Friend WithEvents txtDisplay As TextBox
+    Friend WithEvents txtDisplay As RichTextBox
 End Class

@@ -23,7 +23,28 @@ Public Class Form1
     Private BF As BinaryFormatter
     Private Const FileName As String = "Diseasefile.txt"
 
+    'Baking the file variable
+    Private Sub GetDiseases()
+        FS = New FileStream(FileName, FileMode.OpenOrCreate, FileAccess.Read)
+        BF = New BinaryFormatter()
+
+        While FS.Position < FS.Length
+            'Translating from the trecherous 'BITS' to useable ting
+            Dim TempDisease As Disease
+            TempDisease = DirectCast(BF.Deserialize(FS), Disease)
+
+            'Adding the understandable tings to the disease array
+            nD += 1
+            ReDim Preserve Diseases(nD)
+            Diseases(nD) = TempDisease
+        End While
+
+        FS.Close()
+    End Sub
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        GetDiseases()
+
         'Home screen for da app
         Dim Home As String = "Home:" & Environment.NewLine
         Home += "-------------------" & Environment.NewLine & Environment.NewLine
@@ -32,22 +53,6 @@ Public Class Form1
 
         txtDisplay.Text = Home
 
-        'Baking the file variable
-        FS = New FileStream(FileName, FileMode.OpenOrCreate, FileAccess.Read)
-        BF = New BinaryFormatter()
-
-        While FS.Position < FS.Length
-            'Translating from the trecherous 'BITS' to useable ting
-            nD += 1
-            Dim TempDisease As Disease
-            TempDisease = DirectCast(BF.Deserialize(FS), Disease)
-
-            'Adding the understandable tings to the disease array
-            ReDim Preserve Diseases(nD)
-            Diseases(nD) = TempDisease
-        End While
-
-        FS.Close()
     End Sub
 
     Private Sub btnSetUpTheApplication_Click(sender As Object, e As EventArgs) Handles btnSetUpTheApplication.Click
@@ -77,16 +82,13 @@ Public Class Form1
 
             'Displaying the diseases
             txtDisplay.Text = AllDiseaseInfo
-
+            MsgBox("number of diseases: " & nD)
         Else
             MsgBox("No disease were made")
         End If
     End Sub
 
     Private Sub btnCaptureTheData_Click(sender As Object, e As EventArgs) Handles btnCaptureTheData.Click
-        ReDim Preserve Diseases(nD)
-        'ReDim Preserve NPopulation(nD)
-
         Dim Name As String
         Dim nPopulation As Integer 'My own thin 
         Dim Budget As Double
@@ -118,52 +120,53 @@ Public Class Form1
                 AveCoughes = CDbl(InputBox("Please enter the average coughes  "))
 
                 Dim objRespiratory As Respiratory
-                objRespiratory = New Respiratory(Name, nPopulation, TotalPopulation, Treatable, PartAffected, AveCoughes)
-                'Upcasting 
+                objRespiratory = New Respiratory(Name, nPopulation, TotalPopulation, Treatable, Budget, PartAffected, AveCoughes)
+
                 txtDisplay.Text = objRespiratory.display()
+
+                'Upcasting 
                 nD += 1
+                ReDim Preserve Diseases(nD)
                 Diseases(nD) = objRespiratory
             Case 2
                 'Immune 
                 NameOfCells = (InputBox("Please enter the name of the cells "))
                 Cause = InputBox("Please enter the cause of the disease ")
                 Dim objImmune As Immune
-                objImmune = New Immune(Name, nPopulation, TotalPopulation, Treatable, NameOfCells, Cause)
-                'Upcasting 
+                objImmune = New Immune(Name, nPopulation, TotalPopulation, Treatable, Budget, NameOfCells, Cause)
+
                 txtDisplay.Text = objImmune.display()
+
+                'Upcasting 
                 nD += 1
+                ReDim Preserve Diseases(nD)
                 Diseases(nD) = objImmune
             Case 3
                 'Genetic 
                 Dim objGenetic As Genetic
-                Dim AverageAge As Double = CDbl(InputBox("Please enter the average age"))
-                objGenetic = New Genetic(Name, nPopulation, TotalPopulation, Treatable, AverageAge)
+                Dim objGeneticType As GeneticType
 
                 Dim GeneticTypeName As String = CStr(InputBox("Please enter the name of the genetic type."))
                 Dim GeneticTypeInherited As Boolean = CBool(InputBox("is the type inherited", "TRUE OR FALSE"))
-                'objGenetic.Type.Name = CStr(InputBox("Please enter the name of the genetic type."))
-                'objGenetic.Type.Inherited = CBool(InputBox("is the type inherited", "TRUE OR FALSE"))
-                objGenetic.Type = New GeneticType(GeneticTypeName, GeneticTypeInherited)
+                objGeneticType = New GeneticType(GeneticTypeName, GeneticTypeInherited)
 
-                'Upcasting 
+                Dim AverageAge As Double = CDbl(InputBox("Please enter the average age"))
+                objGenetic = New Genetic(Name, nPopulation, TotalPopulation, Treatable, Budget, AverageAge, objGeneticType)
+
                 txtDisplay.Text = objGenetic.display()
+
+                'Upcasting
                 nD += 1
+                ReDim Preserve Diseases(nD)
                 Diseases(nD) = objGenetic
         End Select
 
-        'Polymorphism 
-        For i As Integer = 1 To nD
-            txtDisplay.Text = Diseases(i).display()
-        Next i
-
-
-
         FS = New FileStream(FileName, FileMode.Create, FileAccess.Write)
-        BF = New BinaryFormatter
+        BF = New BinaryFormatter()
 
         For i As Integer = 1 To nD
+            MsgBox("Saving " & Diseases(i).Name)
             BF.Serialize(FS, Diseases(i))
-            MsgBox("Saving successful")
         Next i
 
         FS.Close()

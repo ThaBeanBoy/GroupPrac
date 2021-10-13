@@ -21,8 +21,8 @@ Option Infer On
     Private _AveNumOfCoughs As Double
 
     '<<Constructor>>
-    Public Sub New(Name As String, PopulationSize As Integer, TotalPopulation As Integer, Treatable As Boolean, PartAffected As String, AveNumOfCoughs As Double)
-        MyBase.New(Name, PopulationSize, TotalPopulation, Treatable)
+    Public Sub New(Name As String, PopulationInfected As Integer, TotalPopulation As Integer, Treatable As Boolean, Budget As Double, PartAffected As String, AveNumOfCoughs As Double)
+        MyBase.New(Name, PopulationInfected, TotalPopulation, Treatable, Budget)
         _PartAffected = PartAffected
         _AveNumOfCoughs = AveNumOfCoughs
     End Sub
@@ -57,6 +57,6 @@ Option Infer On
         Dim PA As String = "Part Affected: " & _PartAffected & Environment.NewLine
         Dim AVNC As String = "Average number of coughs: " & Format(_AveNumOfCoughs, ".##") & Environment.NewLine
 
-        Return DType + OgInfo + PA + AVNC
+        Return DType + OgInfo + PA + AVNC & Environment.NewLine
     End Function
 End Class

@@ -19,11 +19,12 @@ Option Explicit On
 	Private _Budget As Double
 	Private _Treatable As Boolean
 
-	Public Sub New(Name As String, PopulationInfected As Integer, TotalPopulation As Integer, Treatable As Boolean)
+	Public Sub New(Name As String, PopulationInfected As Integer, TotalPopulation As Integer, Treatable As Boolean, Budget As Double)
 		_TotalPopulation = TotalPopulation
 		_Name = Name
 		_PopulationInfected = PopulationInfected
 		_Treatable = Treatable
+		_Budget = Budget
 	End Sub
 
 	Public ReadOnly Property Name() As String
@@ -72,7 +73,7 @@ Option Explicit On
 		'Deal with this disease     
 		Dim improve As String
 
-		While calcPercPopulation() < 50
+		If calcPercPopulation() < 50 Then
 
 			If Treatable = True Then
 				improve = "Catergory One(2) Improvement"
@@ -80,9 +81,7 @@ Option Explicit On
 				improve = "Category Two(2) Improvement"
 			End If
 
-		End While
-
-		While calcPercPopulation() > 50
+		Else
 
 			If Treatable = True Then
 				improve = "Catergory One(3) Improvement"
@@ -90,7 +89,7 @@ Option Explicit On
 				improve = "Category Two(4) Improvement"
 			End If
 
-		End While
+		End If
 
 		Return improve
 	End Function
