@@ -85,6 +85,11 @@ Public Class Form1
         End If
     End Sub
 
+    Private Function DialogToBoolean(Question As String, Title As String) As Boolean
+        Dim result As DialogResult = MessageBox.Show(Question, Title, MessageBoxButtons.YesNo)
+        Return result = DialogResult.Yes
+    End Function
+
     Private Sub btnCaptureTheData_Click(sender As Object, e As EventArgs) Handles btnCaptureTheData.Click
         Dim Name As String
         Dim nPopulation As Integer 'My own thin 
@@ -102,11 +107,11 @@ Public Class Form1
                                "2.Immune" & Environment.NewLine &
                                "3.Genetic"))
 
-        Name = InputBox("Please enter the name of the disease ?")
-        Budget = CInt(InputBox("Please enter the budget available for the disease?"))
-        nPopulation = CInt(InputBox("Please enter the amount of people affected by the disease")) 'My own thing 
-        Treatable = CBool(InputBox("Is the disease treatable", "TRUE OR FALSE"))
-        TotalPopulation = CInt(InputBox("Please enter the total population."))
+        Name = InputBox("Please enter the name of the disease ?", "Name of Disease")
+        Budget = CInt(InputBox("Please enter the budget available for " & Name & " ?", "Budget"))
+        nPopulation = CInt(InputBox("Please enter the amount of people with " & Name, "Population infected")) 'My own thing 
+        Treatable = DialogToBoolean("Is " & Name & " treatable", "Treatability")
+        TotalPopulation = CInt(InputBox("Please enter the total population of environment."))
 
 
 
@@ -114,13 +119,13 @@ Public Class Form1
         Select Case choice
             Case 1
                 'Resperitory 
-                PartAffected = InputBox("Please enter the part affrected by the disease?")
-                AveCoughes = CDbl(InputBox("Please enter the average coughes  "))
+                PartAffected = InputBox("Please enter the part affected by " & Name & " ?", "Part affected")
+                AveCoughes = CDbl(InputBox("Please enter the average coughes caused by " & Name, "Average Number of Coughs"))
 
                 Dim objRespiratory As Respiratory
                 objRespiratory = New Respiratory(Name, nPopulation, TotalPopulation, Treatable, Budget, PartAffected, AveCoughes)
 
-                txtDisplay.Text = "Newest Disease:" & Environment.NewLine & Environment.NewLine & objRespiratory.display()
+                txtDisplay.Text = "Newest Disease:" & Environment.NewLine & Environment.NewLine & objRespiratory.display() & Environment.NewLine & Environment.NewLine & "Press the 'Set Up' button to display all Diseases"
 
                 'Upcasting 
                 nD += 1
@@ -128,12 +133,12 @@ Public Class Form1
                 Diseases(nD) = objRespiratory
             Case 2
                 'Immune 
-                NameOfCells = (InputBox("Please enter the name of the cells "))
-                Cause = InputBox("Please enter the cause of the disease ")
+                NameOfCells = (InputBox("Please enter the name of the cells", "Name of Cells"))
+                Cause = InputBox("Please enter the cause of " & Name)
                 Dim objImmune As Immune
                 objImmune = New Immune(Name, nPopulation, TotalPopulation, Treatable, Budget, NameOfCells, Cause)
 
-                txtDisplay.Text = "Newest Disease:" & Environment.NewLine & Environment.NewLine & objImmune.display()
+                txtDisplay.Text = "Newest Disease:" & Environment.NewLine & Environment.NewLine & objImmune.display() & Environment.NewLine & Environment.NewLine & "Press the 'Set Up' button to display all Diseases"
 
                 'Upcasting 
                 nD += 1
@@ -145,13 +150,13 @@ Public Class Form1
                 Dim objGeneticType As GeneticType
 
                 Dim GeneticTypeName As String = CStr(InputBox("Please enter the name of the genetic type."))
-                Dim GeneticTypeInherited As Boolean = CBool(InputBox("is the type inherited", "TRUE OR FALSE"))
+                Dim GeneticTypeInherited As Boolean = DialogToBoolean("is the type inherited", "Inheritable")
                 objGeneticType = New GeneticType(GeneticTypeName, GeneticTypeInherited)
 
-                Dim AverageAge As Double = CDbl(InputBox("Please enter the average age"))
+                Dim AverageAge As Double = CDbl(InputBox("Please enter the average age of " & Name, "Average age"))
                 objGenetic = New Genetic(Name, nPopulation, TotalPopulation, Treatable, Budget, AverageAge, objGeneticType)
 
-                txtDisplay.Text = "Newest Disease:" & Environment.NewLine & Environment.NewLine & objGenetic.display()
+                txtDisplay.Text = "Newest Disease:" & Environment.NewLine & Environment.NewLine & objGenetic.display() & Environment.NewLine & Environment.NewLine & "Press the 'Set Up' button to display all Diseases"
 
                 'Upcasting
                 nD += 1
@@ -159,6 +164,7 @@ Public Class Form1
                 Diseases(nD) = objGenetic
         End Select
 
+        'Saving all diseases.
         FS = New FileStream(FileName, FileMode.Create, FileAccess.Write)
         BF = New BinaryFormatter()
 
@@ -170,6 +176,7 @@ Public Class Form1
     End Sub
 
     Private Sub btnFindASolution_Click(sender As Object, e As EventArgs) Handles btnFindASolution.Click
+
         'To Find The solution Would be based on the classes of diseases That ranked top 3
         If nD >= 3 Then
             Dim HighestInfectedPercs(3) As Disease
@@ -177,22 +184,14 @@ Public Class Form1
 
             Dim Highest As Integer = HighestInfPerc(DiseaseQualifier)
             HighestInfectedPercs(1) = DiseaseQualifier(Highest)
-            MsgBox(HighestInfectedPercs(1).Name & " at " & HighestInfectedPercs(1).calcPercPopulation())
             FilterOut(DiseaseQualifier, Highest)
 
             Highest = HighestInfPerc(DiseaseQualifier)
             HighestInfectedPercs(2) = DiseaseQualifier(Highest)
-            MsgBox(HighestInfectedPercs(2).Name & " at " & HighestInfectedPercs(2).calcPercPopulation())
             FilterOut(DiseaseQualifier, Highest)
 
             Highest = HighestInfPerc(DiseaseQualifier)
             HighestInfectedPercs(3) = DiseaseQualifier(Highest)
-
-            'If all the disease are of the same disease type, msgbox the name of the disease type
-            'MsgBox("Highest in order")
-            'MsgBox(HighestInfectedPercs(1).Name & " at " & HighestInfectedPercs(1).calcPercPopulation())
-            'MsgBox(HighestInfectedPercs(2).Name & " at " & HighestInfectedPercs(2).calcPercPopulation())
-            'MsgBox(HighestInfectedPercs(3).Name & " at " & HighestInfectedPercs(3).calcPercPopulation())
 
             If Not (TryCast(HighestInfectedPercs(1), Immune) Is Nothing) And Not (TryCast(HighestInfectedPercs(2), Immune) Is Nothing) And Not (TryCast(HighestInfectedPercs(3), Immune) Is Nothing) Then
                 MsgBox("The top 3 diseases are all Immune diseases")
