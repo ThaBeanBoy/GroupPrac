@@ -66,7 +66,7 @@ Partial Class Form1
         Me.btnFindASolution.Name = "btnFindASolution"
         Me.btnFindASolution.Size = New System.Drawing.Size(128, 38)
         Me.btnFindASolution.TabIndex = 3
-        Me.btnFindASolution.Text = "Solution"
+        Me.btnFindASolution.Text = "Correlation"
         Me.btnFindASolution.UseVisualStyleBackColor = True
         '
         'txtDisplay
@@ -91,7 +91,7 @@ Partial Class Form1
         Me.Controls.Add(Me.Label1)
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "Form1"
-        Me.Text = "Form1"
+        Me.Text = "Disease Control Center"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
